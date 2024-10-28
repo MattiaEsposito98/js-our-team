@@ -34,11 +34,32 @@ const teamMembers = [
     role: "Analyst",
     email: "danielaamet@team.com",
     img: "img/female3.png"
-  }
-  
+  },
+
 ];
 
+//Funzione per nuova card
+function newCard(name, role, email) {
+  const newCard = `
+  <div class=" card bg-dark text-white col-md-6 col-lg-4 mb-3 fw-bold">
+    <div class="row">
+      <div class="col-md-4"> 
+        img
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">${name}</h5>
+          <p class="card-text">${role}</p>
+          <p class="card-text">${email}</p>
+        </div>
+      </div>
+    </div>
+  </div>`
+  teamCardsContainer.innerHTML += newCard
+}
 
+
+//Creazione card
 const teamCardsContainer = document.getElementById("cards")
 
 teamMembers.forEach((member) => {
@@ -61,10 +82,34 @@ teamMembers.forEach((member) => {
   </div>
 </div>
   `
-
   teamCardsContainer.appendChild(card)
 })
 
+
+
+//Form
+let formElement = document.getElementById('form-element')
+const btnSubmit = document.querySelector('button')
+
+formElement = addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  let nameUser = document.getElementById("InputName").value
+  let workUser = document.getElementById("InputWork").value
+  let emailUser = document.getElementById("InputEmail").value
+
+  let newUser = {}
+  newUser.name = nameUser
+  newUser.role = workUser
+  newUser.email = emailUser
+  console.log(newUser, teamMembers)
+
+  teamMembers.push(newUser)
+
+
+  //Funzione 
+  newCard(nameUser, workUser, emailUser)
+})
 
 
 
